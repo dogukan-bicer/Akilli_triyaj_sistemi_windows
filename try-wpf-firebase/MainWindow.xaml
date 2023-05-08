@@ -5,7 +5,7 @@
         FontFamily="RSU"
         FontSize="20"
         WindowStartupLocation="CenterScreen"
-        Title="Firebase Database [CRUD]" Height="400" Width="743">
+        Title="Akilli Triyaj Sistemi[beta]" Height="400" Width="743">
     <Grid>
         <Grid.Resources>
             <Style x:Key="button" TargetType="{x:Type Button}">
