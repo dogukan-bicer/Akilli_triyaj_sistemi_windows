@@ -90,7 +90,7 @@ namespace MySchool_Firebase
 
             FirebaseResponse response = await _client.UpdateAsync("students/" + student.ID, student);
 
-            lbResponse.Text = String.Format("Updated {0}",response.ResultAs<Student>().Name);
+           // lbResponse.Text = String.Format("Updated {0}",response.ResultAs<Student>().Name);
         }
 
         async void btPush_Click(object sender, RoutedEventArgs e)
@@ -99,14 +99,14 @@ namespace MySchool_Firebase
 
             PushResponse response = await _client.PushAsync("students/", student);
 
-            lbResponse.Text = response.Result.name;
+           // lbResponse.Text = response.Result.name;
         }
 
         async void btDelete_Click(object sender, RoutedEventArgs e)
         {
             FirebaseResponse response = await _client.DeleteAsync("students/" + tbID.Text);
 
-            lbResponse.Text = response.StatusCode.ToString();
+            //lbResponse.Text = response.StatusCode.ToString();
         }
 
         async void btSet_Click(object sender, RoutedEventArgs e)
@@ -116,7 +116,7 @@ namespace MySchool_Firebase
 
             SetResponse response = await _client.SetAsync("students/"+student.ID,student);
 
-            lbResponse.Text = String.Format("Added {0}",response.ResultAs<Student>().Name);
+            //lbResponse.Text = String.Format("Added {0}",response.ResultAs<Student>().Name);
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)

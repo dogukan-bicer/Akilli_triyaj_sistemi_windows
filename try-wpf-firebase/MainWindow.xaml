@@ -5,7 +5,7 @@
         FontFamily="RSU"
         FontSize="20"
         WindowStartupLocation="CenterScreen"
-        Title="Firebase Database [CRUD]" Height="400" Width="1133">
+        Title="Firebase Database [CRUD]" Height="400" Width="743">
     <Grid>
         <Grid.Resources>
             <Style x:Key="button" TargetType="{x:Type Button}">
@@ -47,12 +47,8 @@
             <Button x:Name="btDelete" Content="DELETE" Foreground="Red" Style="{StaticResource button}"/>
             <Button x:Name="btClose" Content="Close" Foreground="Red" Style="{StaticResource button}"/>
         </StackPanel>
-        <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-         ScrollViewer.VerticalScrollBarVisibility="Auto"
-            
-            x:Name="lbResponse" Margin="10,18,0,22" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" Background="#FFE8D4D4" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="488"/>
 
-        <DataGrid Name="data_grid" Grid.Row="3" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="461,20,66,20" Grid.Column="1"/>
+        <DataGrid Name="data_grid" Grid.Row="3" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="20,20,25,20" Grid.Column="1" Background="#FFFDF3F3"/>
 
     </Grid>
 </Window>
