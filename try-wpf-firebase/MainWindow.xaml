@@ -1,0 +1,51 @@
+﻿<Window x:Class="MySchool_Firebase.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        FontFamily="RSU"
+        FontSize="20"
+        WindowStartupLocation="CenterScreen"
+        Title="Firebase Database [CRUD]" Height="400" Width="530">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="button" TargetType="Button">
+                <Setter Property="Margin" Value="3 3 3 10"/>
+                <Setter Property="Width" Value="80"/>
+            </Style>
+            <Style x:Key="textbox" TargetType="TextBox">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="kod:" Grid.Row="0" Grid.Column="0"></Label>
+        <TextBox Name="tbID" Grid.Row="0" Grid.Column="1" Style="{StaticResource textbox}" Width="100" HorizontalAlignment="Left"></TextBox>
+
+        <Label Content="İsim:" Grid.Row="1" Grid.Column="0"></Label>
+        <TextBox Name="tbName" Grid.Row="1" Grid.Column="1" Style="{StaticResource textbox}"></TextBox>
+
+        <Label Content="Soyadı:" Grid.Row="2" Grid.Column="0"></Label>
+        <TextBox Name="tbSername" Grid.Row="2" Grid.Column="1" Style="{StaticResource textbox}"></TextBox>
+
+        <TextBlock Name="lbResponse" Grid.Row=" 3" Grid.Column=" 2"></TextBlock>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Name="btSet" Content="SET" Foreground="Green" Style="{StaticResource button}"></Button>
+            <Button Name="btPush" Content="PUSH" Foreground="Green" Style="{StaticResource button}"></Button>
+            <Button Name="btGet" Content="GET" Foreground="Yellow" Style="{StaticResource button}"></Button>
+            <Button Name="btUpdate" Content="UPDATE" Foreground="Yellow" Style="{StaticResource button}"></Button>
+            <Button Name="btDelete" Content="DELETE" Foreground="Red" Style="{StaticResource button}"></Button>
+            <Button Name="btClose" Content="Close" Foreground="Red" Style="{StaticResource button}"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>
