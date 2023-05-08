@@ -66,66 +66,23 @@ namespace MySchool_Firebase
         }
         async void btGet_Click(object sender, RoutedEventArgs e)
         {
-            //string studentID = tbID.Text;
-
-            //FirebaseResponse response = await _client.GetAsync("students/" + tbID.Text);
-
-            //Student student = response.ResultAs<Student>();
-
-            //lbResponse.Text = string.Format("Found {0} {1} {2} in realtime database",student.ID,student.Name,student.SureName);
-
-
-
-            //FirebaseResponse response = await _client.GetAsync("Hasta_0/");
-
-            //Patient patient = response.ResultAs<Patient>();
-
-            //lbResponse.Text = string.Format("Found: \n ID: {0} \n BPM: {1} \n Ambient_Temp: {2} \n Object_Temp: {3}\n SpO2: {4}",
-            //    patient.ID,
-            //    patient.BPM,
-            //    patient.Ambient_Temp,
-            //    patient.Object_Temp,
-            //    patient.SpO2);
-
-            //FirebaseResponse response = await _client.GetAsync("");
-
-            //dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body.ToString());
-
-            //lbResponse.Text = data.ToString();
-
             FirebaseResponse response = await _client.GetAsync("");
 
             dynamic array = JsonConvert.DeserializeObject(response.Body.ToString());
 
-
             foreach (var site in (JObject)array)
             {
-                patient_number.Add(site.Key.ToString());
+               patient_number.Add(site.Key.ToString());
                FirebaseResponse resp = await _client.GetAsync(patient_number[patient_number.Count-1]);
                var cls = new Patient();
                cls = resp.ResultAs<Patient>();
+               cls.Patient_Name = patient_number[patient_number.Count - 1];
                patient_data.Add(cls);
 
             }
 
-            string temp_str="";
-
-            for (int i = 0; i < patient_number.Count ; i++)
-            {
-                temp_str= temp_str + string.Format("{5}: \n ID: {0} \n BPM: {1} \n Ambient_Temp: {2} \n Object_Temp: {3}\n SpO2: {4}",
-                patient_data[i].ID,
-                patient_data[i].BPM,
-                patient_data[i].Ambient_Temp,
-                patient_data[i].Object_Temp,
-                patient_data[i].SpO2,
-                patient_number[i]) + "\n";
-                
-            }
-
-
-            lbResponse.Text = temp_str;
-
-            //string.Join(",", patient_list);
+            data_grid.ItemsSource = patient_data;
+            
         }
         async void btUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -199,12 +156,13 @@ namespace MySchool_Firebase
             public float BPM { get; set; }
             public int ID { get; set; }
 
+            public string Patient_Name { get; set; }
             public Patient()
             {
 
             }
 
-            public Patient(int id, float bPM, float spO2 ,float object_Temp,float ambient_Temp) : this()
+            public Patient(int id, float bPM, float spO2 , float object_Temp, float ambient_Temp, string patient_Name) : this()
             {
                 ID = id;
                 BPM = bPM;
@@ -213,6 +171,10 @@ namespace MySchool_Firebase
                 Object_Temp = object_Temp;
 
                 Ambient_Temp = ambient_Temp;
+
+                Patient_Name = patient_Name;
+
+
             }
         }
     }
