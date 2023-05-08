@@ -28,27 +28,23 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="kod:" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="tbID" Grid.Row="0" Grid.Column="1" Style="{StaticResource textbox}" Width="100" HorizontalAlignment="Left"/>
-
-        <Label Content="İsim:" Grid.Row="1" Grid.Column="0"/>
-        <TextBox x:Name="tbName" Grid.Row="1" Grid.Column="1" Style="{StaticResource textbox}"/>
-
-        <Label Content="Soyadı:" Grid.Row="2" Grid.Column="0"/>
-        <TextBox x:Name="tbSername" Grid.Row="2" Grid.Column="1" Style="{StaticResource textbox}"/>
+        <Label Content="Hasta Verileri" Grid.Row="1" Grid.Column="0" Height="34" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Left" Width="174"/>
 
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button x:Name="btSet" Content="SET" Foreground="Green" Style="{StaticResource button}"/>
-            <Button x:Name="btPush" Content="PUSH" Foreground="Green" Style="{StaticResource button}"/>
-            <Button x:Name="btGet" Content="GET" Foreground="Yellow" Style="{StaticResource button}"/>
-            <Button x:Name="btUpdate" Content="UPDATE" Foreground="Yellow" Style="{StaticResource button}"/>
-            <Button x:Name="btDelete" Content="DELETE" Foreground="Red" Style="{StaticResource button}"/>
-            <Button x:Name="btClose" Content="Close" Foreground="Red" Style="{StaticResource button}"/>
+            <Button x:Name="btGet" Content="Getir" Foreground="Green" Style="{StaticResource button}"/>
+            <Button x:Name="btClose" Content="Sırala" Foreground="Blue" Style="{StaticResource button}"/>
+            <Button x:Name="btClose_Copy" Content="Sil" Foreground="Red" Style="{StaticResource button}" Click="btClose_Copy_Click"/>
         </StackPanel>
 
-        <DataGrid Name="data_grid" Grid.Row="3" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="20,20,25,20" Grid.Column="1" Background="#FFFDF3F3"/>
+        <DataGrid Name="data_grid" ItemsSource="{Binding Patient}"  Grid.Row="3" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="20,20,25,20" Grid.Column="1" Background="White">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{Binding ColorSet}"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
 
     </Grid>
 </Window>

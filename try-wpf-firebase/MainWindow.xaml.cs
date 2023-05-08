@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Policy;
@@ -52,17 +53,55 @@ namespace MySchool_Firebase
             _config = config;
 
             this.Loaded += MainWindow_Loaded;
-            btSet.Click += btSet_Click;
-            btPush.Click += btPush_Click;
+            //btSet.Click += btSet_Click;
+            //btPush.Click += btPush_Click;
             btGet.Click +=btGet_Click;
-            btUpdate.Click += btUpdate_Click;
-            btDelete.Click += btDelete_Click;
+            //btUpdate.Click += btUpdate_Click;
+            //btDelete.Click += btDelete_Click;
             btClose.Click += btClose_Click;
+
+            this.DataContext = this;
         }
+
+        
 
         void btClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            ColorRow(data_grid);
+        }
+
+
+        private void ColorRow(DataGrid dg)
+        {
+            for (int i = 1; i < dg.Items.Count; i++)
+            {
+                DataGridRow row = (DataGridRow)dg.ItemContainerGenerator.ContainerFromIndex(i - 1);
+
+                if (row != null)
+                {
+                    int index = row.GetIndex();
+                    if (patient_data[i-1].SpO2 > 150)
+                    {
+                        SolidColorBrush brush = new SolidColorBrush(Colors.Black);
+                        row.Background = brush;
+                    }
+                    else if (patient_data[i - 1].SpO2>100)
+                    {
+                        SolidColorBrush brush = new SolidColorBrush(Colors.Red);
+                        row.Background = brush;
+                    }
+                    else if (patient_data[i - 1].SpO2 > 80)
+                    {
+                        SolidColorBrush brush = new SolidColorBrush(Colors.Yellow);
+                        row.Background = brush;
+                    }
+                    else if (patient_data[i - 1].SpO2 > -1)
+                    {
+                        SolidColorBrush brush = new SolidColorBrush(Colors.Green);
+                        row.Background = brush;
+                    }
+                }
+            }
         }
         async void btGet_Click(object sender, RoutedEventArgs e)
         {
@@ -82,29 +121,59 @@ namespace MySchool_Firebase
             }
 
             data_grid.ItemsSource = patient_data;
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //data_grid.Columns[0].CellStyle = new Style(typeof(DataGridCell));
+            //data_grid.Columns[0].CellStyle.Setters.Add(new Setter(DataGridCell.BackgroundProperty, new SolidColorBrush(Colors.PaleVioletRed)));
+
+            //data_grid.RowStyle = new Style(typeof(DataGridRow));
+
+            //data_grid.RowStyle.Setters.Add(new Setter(DataGridCell.BackgroundProperty,new SolidColorBrush(Colors.Red)));
+
+            //data_grid.RowBackground= new SolidColorBrush(Colors.BlueViolet);
+
+
+
+
+
+
+
+
+
         }
         async void btUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var student = GetStudent();
+            //var student = GetStudent();
 
-            FirebaseResponse response = await _client.UpdateAsync("students/" + student.ID, student);
+            //FirebaseResponse response = await _client.UpdateAsync("students/" + student.ID, student);
 
            // lbResponse.Text = String.Format("Updated {0}",response.ResultAs<Student>().Name);
         }
 
         async void btPush_Click(object sender, RoutedEventArgs e)
         {
-            var student = GetStudent();
+            //var student = GetStudent();
 
-            PushResponse response = await _client.PushAsync("students/", student);
+            //PushResponse response = await _client.PushAsync("students/", student);
 
            // lbResponse.Text = response.Result.name;
         }
 
         async void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            FirebaseResponse response = await _client.DeleteAsync("students/" + tbID.Text);
+            //FirebaseResponse response = await _client.DeleteAsync("students/" + tbID.Text);
 
             //lbResponse.Text = response.StatusCode.ToString();
         }
@@ -112,9 +181,9 @@ namespace MySchool_Firebase
         async void btSet_Click(object sender, RoutedEventArgs e)
         {
 
-            var student = GetStudent();
+            //var student = GetStudent();
 
-            SetResponse response = await _client.SetAsync("students/"+student.ID,student);
+            //SetResponse response = await _client.SetAsync("students/"+student.ID,student);
 
             //lbResponse.Text = String.Format("Added {0}",response.ResultAs<Student>().Name);
         }
@@ -124,10 +193,10 @@ namespace MySchool_Firebase
             _client = new FirebaseClient(_config);
         }
 
-        Student GetStudent()
-        {
-            return new Student(Convert.ToInt32(tbID.Text), tbName.Text, tbSername.Text);
-        }
+        //Student GetStudent()
+        //{
+        //    //return new Student(Convert.ToInt32(tbID.Text), tbName.Text, tbSername.Text);
+        //}
 
         public class Student
         {
@@ -150,17 +219,19 @@ namespace MySchool_Firebase
 
         public class Patient
         {
-            public float Ambient_Temp { get; set; }
-            public float Object_Temp { get; set; }
+            public string Patient_Name { get; set; }
             public float SpO2 { get; set; }
             public float BPM { get; set; }
+            public float Ambient_Temp { get; set; }
+            public float Object_Temp { get; set; }
             public int ID { get; set; }
 
-            public string Patient_Name { get; set; }
             public Patient()
             {
 
             }
+
+            public string ColorSet { get; set; }
 
             public Patient(int id, float bPM, float spO2 , float object_Temp, float ambient_Temp, string patient_Name) : this()
             {
@@ -174,8 +245,17 @@ namespace MySchool_Firebase
 
                 Patient_Name = patient_Name;
 
+                ColorSet = "Red";
 
             }
+        }
+
+        private void btClose_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            data_grid.DataContext= null;
+            data_grid.ItemsSource = null;
+            patient_data.Clear();
+            data_grid.Items.Refresh();
         }
     }
 }
