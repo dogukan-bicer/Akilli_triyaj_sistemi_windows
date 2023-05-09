@@ -68,6 +68,8 @@ namespace MySchool_Firebase
         void btClose_Click(object sender, RoutedEventArgs e)
         {
             ColorRow(data_grid);
+
+
         }
 
 
@@ -231,8 +233,6 @@ namespace MySchool_Firebase
 
             }
 
-            public string ColorSet { get; set; }
-
             public Patient(int id, float bPM, float spO2 , float object_Temp, float ambient_Temp, string patient_Name) : this()
             {
                 ID = id;
@@ -244,8 +244,6 @@ namespace MySchool_Firebase
                 Ambient_Temp = ambient_Temp;
 
                 Patient_Name = patient_Name;
-
-                ColorSet = "Red";
 
             }
         }
