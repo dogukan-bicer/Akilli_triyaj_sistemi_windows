@@ -45,6 +45,11 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
+        <Canvas Grid.ColumnSpan="2" Grid.Row="1" Margin="235,0,0,10" Background="Red" HorizontalAlignment="Left" Width="36"/>
+        <Canvas Grid.ColumnSpan="2" Grid.Row="1" Margin="271,0,0,10" Background="Lime" RenderTransformOrigin="0.579,0.561" HorizontalAlignment="Left" Width="36"/>
+        <Canvas Grid.ColumnSpan="2" Grid.Row="1" Margin="307,0,0,10" Background="Yellow" RenderTransformOrigin="0.579,0.561" HorizontalAlignment="Left" Width="36"/>
+        <Canvas Grid.ColumnSpan="2" Grid.Row="1" Margin="343,0,0,10" Background="Black" RenderTransformOrigin="0.579,0.561" HorizontalAlignment="Left" Width="36"/>
+        <Label Content="Acil-Stabil-Stabil değil-Ölü" Grid.Row="1" Grid.Column="0" Height="34" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="178,24,0,0" HorizontalAlignment="Left" Width="255" Grid.RowSpan="3"/>
 
     </Grid>
 </Window>
